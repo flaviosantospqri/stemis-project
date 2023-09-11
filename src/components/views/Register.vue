@@ -1,49 +1,93 @@
-<script>
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "Register",
-  path: "/register",
-  methods: {
-    navigateToHome() {
-      this.$router.push("/");
-    },
-    sendInformations(values) {
-      console.log(values);
-    },
-  },
-});
-</script>
 
 <template>
-  <h1>add customer</h1>
-  <div class="container-register">
-    <form>
-      <input
-        type="text"
-        name="birthdate"
-        id="birthdate"
-        placeholder="Birthdate"
-      />
-      <input type="text" name="name" id="name" placeholder="Name" />
-      <ButtonVue medium text="Register" colorScheme="send" />
-    </form>
+  <div>
+    <h1>add customer</h1>
+    <div class="container-register">
+      <form @submit="submitForm">
+        <div>
+          <input
+            type="text"
+            v-model="formData.birthDate"
+            name="birthDate"
+            id="birthDate"
+            placeholder="birthDate"
+          />
+          <span class="error">{{ errors.birthDate }}</span>
+        </div>
+        <div>
+          <input
+            type="text"
+            v-model="formData.name"
+            name="name"
+            id="name"
+            placeholder="Name"
+          />
+          <span class="error">{{ errors.name }}</span>
+        </div>
+        <button type="submit">Register</button>
+      </form>
+    </div>
   </div>
-  <div @click="navigateToHome">
-    <ButtonVue
-      onSubmit="{{sendInformations(data)}}"
-      small
-      text="Return"
-      icon="arrow-left"
-    />
-  </div>
+  <router-link to="/">Home</router-link>
 </template>
 
 <script setup>
-import ButtonVue from "../structure/Button.vue";
-import SearchVue from "../structure/Search.vue";
+import { ref } from "vue";
+import * as yup from "yup";
+import fetchApi from "../../services/api";
+import { useRouter } from "vue-router";
+const formData = ref({
+  birthDate: "",
+  name: "",
+});
+
+const schema = yup.object().shape({
+  birthDate: yup.string().required("Birthdate is required"),
+  name: yup.string().required("Name is required"),
+});
+
+const errors = ref({
+  birthDate: "",
+  name: "",
+});
+
+const submitForm = async (event) => {
+  event.preventDefault();
+
+  for (const key in errors.value) {
+    errors.value[key] = "";
+  }
+
+  try {
+    await schema.validate(formData.value, { abortEarly: false });
+    console.log("Form data:", formData.value);
+
+    try {
+      const response = await fetchApi("/person", "POST", formData.value);
+      if (response.uuid !== null) {
+        this.$router.push({ name: "Home" });
+      }
+      if (response && response.error) {
+        throw new Error(response.error);
+      }
+
+      sendInformations(formData.value);
+    } catch (apiError) {
+      console.error("API Error:", apiError.message);
+    }
+  } catch (validationErrors) {
+    if (validationErrors.inner) {
+      validationErrors.inner.forEach((error) => {
+        errors.value[error.path] = error.message;
+      });
+    } else {
+      console.error("Validation error:", validationErrors);
+    }
+  }
+};
 </script>
 
-<style scoped>
+<style scoped >
 h1 {
   font-size: 1.5rem;
   font-family: "Roboto", sans-serif;
@@ -75,5 +119,10 @@ input {
   max-width: 350px;
   border-radius: 4px;
   border: 1px solid grey;
+}
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 5px;
 }
 </style>

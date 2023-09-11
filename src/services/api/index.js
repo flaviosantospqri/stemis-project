@@ -1,4 +1,4 @@
-const baseUrl = "https://api-address-person.up.railway.app/";
+const baseUrl = "https://api-address-person.up.railway.app";
 
 export default async function fetchApi(endpoint, method = "GET", data) {
   const url = `${baseUrl}${endpoint}`;
@@ -19,7 +19,6 @@ export default async function fetchApi(endpoint, method = "GET", data) {
 
   try {
     const response = await fetch(url, options);
-
     if (!response.ok) {
       throw new Error(`Request failed with status ${response.status}`);
     }
