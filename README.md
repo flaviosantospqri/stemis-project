@@ -42,4 +42,4 @@ This web application is designed to manage a list of persons, allowing you to vi
 
 ## Contact
 
-For any questions or feedback, please contact [Your Name](mailto:flavio.pasantos@outlook.com).
+For any questions or feedback, please contact [Flávio Santos](mailto:flavio.pasantos@outlook.com).
