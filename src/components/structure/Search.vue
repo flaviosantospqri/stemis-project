@@ -1,16 +1,69 @@
 <template>
   <div>
-    <form class="container-search">
+    <form class="container-search" @submit.prevent="searchPersons">
       <div class="input-container">
-        <i class="fas fa-search">
-          <fa icon="search" />
-        </i>
-
-        <input class="input-search" type="text" placeholder="Search" />
+        <i class="fas fa-search"></i>
+        <input
+          class="input-search"
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search"
+        />
       </div>
     </form>
+    <div @click="navigateToRegister">
+      <Button small></Button>
+    </div>
+    <List :list="filteredPersons" />
   </div>
 </template>
+
+<script>
+import fetchApi from "../../services/api";
+import Button from "./Button.vue";
+import List from "./List.vue";
+
+export default {
+  data() {
+    return {
+      searchQuery: "",
+      persons: [],
+    };
+  },
+  methods: {
+    navigateToRegister() {
+      this.$router.push("/register");
+    },
+  },
+  async created() {
+    await this.fetchPersons();
+  },
+  methods: {
+    async fetchPersons() {
+      try {
+        const result = await fetchApi("/person/find-all", "GET");
+        this.persons = result;
+      } catch (error) {
+        console.error("Error fetching persons:", error);
+      }
+    },
+    searchPersons() {
+      const query = this.searchQuery.toLowerCase();
+    },
+  },
+
+  computed: {
+    filteredPersons() {
+      const query = this.searchQuery.toLowerCase();
+      return this.persons.filter((person) =>
+        person.name.toLowerCase().includes(query)
+      );
+    },
+  },
+
+  components: { List, Button },
+};
+</script>
 
 <style scoped>
 .container-search {

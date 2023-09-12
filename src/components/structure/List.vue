@@ -1,25 +1,3 @@
-<script setup>
-import { ref, onMounted } from "vue";
-import fetchApi from "../../services/api";
-import Card from "./Card.vue";
-
-const persons = ref([]);
-const loading = ref(true);
-const error = (ref < String) | (null > null);
-
-const getData = async () => {
-  try {
-    const result = await fetchApi("/person/find-all", "GET");
-    persons.value = result;
-    loading.value = false;
-  } catch (err) {
-    error.value = "Error: " + err;
-    loading.value = false;
-  }
-};
-
-onMounted(getData);
-</script>
 <template>
   <div class="container-list">
     <div class="container-title">
@@ -29,15 +7,21 @@ onMounted(getData);
     <div v-else class="container-response-api">
       <div v-if="error">{{ error }}</div>
       <ul v-else class="list">
-        <Card
-          v-for="person in persons"
-          :key="person.uuid"
-          :person="person"
-        ></Card>
+        <Card v-for="person in list" :key="person.uuid" :person="person">
+        </Card>
       </ul>
     </div>
   </div>
 </template>
+
+<script setup>
+import Card from "./Card.vue";
+
+const { list } = defineProps({
+  list: [],
+});
+console.log(list);
+</script>
 
 <style scoped>
 .container-list {
