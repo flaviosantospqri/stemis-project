@@ -2,4 +2,40 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+a,
+link {
+    text-decoration: none;
+    margin-left: 2.5%;
+    font-size: 1.5rem;
+    background-color: #074278;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+a:hover {
+    background-color: #ffffff;
+    color: #074278;
+}
+
+button {
+    width: 100%;
+    padding: 5px;
+    max-width: 320px;
+    box-shadow: 10px 10px 5px -10px rgba(0, 0, 0, 0.75);
+    background-color: #4e8266;
+    border: none;
+    color: #ffffff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: 500;
+
 }

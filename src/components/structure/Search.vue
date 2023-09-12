@@ -11,8 +11,8 @@
         />
       </div>
     </form>
-    <div @click="navigateToRegister">
-      <Button small></Button>
+    <div>
+      <router-link to="/register">New customer</router-link>
     </div>
     <List :list="filteredPersons" />
   </div>
@@ -29,11 +29,6 @@ export default {
       searchQuery: "",
       persons: [],
     };
-  },
-  methods: {
-    navigateToRegister() {
-      this.$router.push("/register");
-    },
   },
   async created() {
     await this.fetchPersons();

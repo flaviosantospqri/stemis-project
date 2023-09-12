@@ -1,4 +1,4 @@
-const baseUrl = "https://api-address-person.up.railway.app";
+const baseUrl = "https://api-address-person.up.railway.app/";
 
 export default async function fetchApi(endpoint, method = "GET", data) {
   const url = `${baseUrl}${endpoint}`;
