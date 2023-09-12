@@ -18,7 +18,7 @@ This web application is designed to manage a list of persons, allowing you to vi
 - [Vite](https://vitejs.dev/): A fast build tool for modern web development.
 
 ## Usage
-
+## Pattern used to add Date of Birth: YYYY/MM/DD example 200-07-5
 - Once the application is running, you can use the navigation menu to explore the different features:
   - "Home": View the list of persons from the API.
   - "Add Customer": Add a new person to the list by filling out the form.
