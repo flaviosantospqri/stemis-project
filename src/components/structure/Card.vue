@@ -36,7 +36,7 @@ const callModal = () => {
 <style scoped>
 .container-card {
   cursor: pointer;
-  min-height: 15%;
+  min-height: 150px;
   box-shadow: 0px 11px 10px -10px rgba(0, 0, 0, 0.75);
   list-style: none;
   border-radius: 4px;
