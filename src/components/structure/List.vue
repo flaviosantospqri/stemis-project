@@ -28,7 +28,6 @@ console.log(list);
   background-color: #fafafd;
   display: flex;
   align-items: center;
-  height: 100vh;
   flex-direction: column;
   justify-content: center;
 }
@@ -46,7 +45,6 @@ console.log(list);
 }
 .container-response-api {
   width: 100%;
-  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;

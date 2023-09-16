@@ -10,7 +10,7 @@
             v-model="formData.birthDate"
             name="birthDate"
             id="birthDate"
-            placeholder="birthDate"
+            placeholder="birthdate"
           />
           <span class="error">{{ errors.birthDate }}</span>
         </div>
@@ -32,10 +32,14 @@
 </template>
 
 <script setup>
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 import { ref } from "vue";
 import * as yup from "yup";
 import fetchApi from "../../services/api";
 import { useRouter } from "vue-router";
+methods: {
+}
 const formData = ref({
   birthDate: "",
   name: "",
@@ -65,15 +69,21 @@ const submitForm = async (event) => {
     try {
       const response = await fetchApi("/person", "POST", formData.value);
       if (response.uuid !== null) {
-        this.$router.push({ name: "Home" });
+        toast.success("Registred with sucess !", {
+          autoClose: 1000,
+        });
       }
       if (response && response.error) {
         throw new Error(response.error);
       }
-
-      sendInformations(formData.value);
     } catch (apiError) {
       console.error("API Error:", apiError.message);
+      toast.error(
+        "Error verify informations, date in this pattern (YYYY-MM-DD)!",
+        {
+          autoClose: 1000,
+        }
+      );
     }
   } catch (validationErrors) {
     if (validationErrors.inner) {

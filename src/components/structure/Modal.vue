@@ -17,6 +17,9 @@
         </section>
         <section v-else>
           <p>There is no registered andress yet</p>
+          <p class="text-add-house">
+            Add<fa class="house-user" icon="house" />
+          </p>
         </section>
         <footer></footer>
       </div>
@@ -55,13 +58,18 @@ const close = () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
 }
-
+.text-add-house {
+  font-size: 1rem;
+  width: 60px;
+  display: flex;
+  justify-content: space-around;
+}
 .modal-content {
   background-color: #ffffff;
   padding: 20px;
@@ -69,7 +77,8 @@ const close = () => {
   border-radius: 8px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   position: relative;
-  max-width: 80%;
+  max-width: 600px;
+  width: 80%;
 }
 
 .close-icon {

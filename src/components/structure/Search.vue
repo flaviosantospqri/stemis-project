@@ -2,7 +2,7 @@
   <div>
     <form class="container-search" @submit.prevent="searchPersons">
       <div class="input-container">
-        <i class="fas fa-search"></i>
+        <i class="fas fa-search"><fa icon="search"></fa></i>
         <input
           class="input-search"
           type="text"
@@ -11,7 +11,7 @@
         />
       </div>
     </form>
-    <div>
+    <div class="btn-register-container">
       <router-link to="/register">New customer</router-link>
     </div>
     <List :list="filteredPersons" />
@@ -62,8 +62,6 @@ export default {
 
 <style scoped>
 .container-search {
-  width: 100%;
-  height: 5vh;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -75,7 +73,12 @@ export default {
   width: 80%;
   display: inline-block;
 }
-
+.btn-register-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
 .input-container i {
   position: absolute;
   left: 10px;
@@ -84,10 +87,12 @@ export default {
 }
 
 .input-search {
-  width: 80%;
-  height: 3vh;
-  border: 1px solid #d9d9d9;
+  width: 100%;
+  height: 30px;
+  border: 2px solid #d9d9d9;
   border-radius: 4px;
   padding-left: 30px;
+  font-size: 1rem;
+  font-weight: 400;
 }
 </style>

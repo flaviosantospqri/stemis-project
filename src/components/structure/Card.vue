@@ -36,13 +36,16 @@ const callModal = () => {
 <style scoped>
 .container-card {
   cursor: pointer;
-  min-height: 150px;
+  height: 150px;
   box-shadow: 0px 11px 10px -10px rgba(0, 0, 0, 0.75);
   list-style: none;
   border-radius: 4px;
   background-color: #ffffff;
   width: 80%;
   margin-top: 20px;
-  height: 120px;
+  align-self: flex-start;
+  margin-left: 5%;
+  padding: 20px;
+  font-size: 1.5rem;
 }
 </style>
